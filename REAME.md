@@ -1,1 +1,1 @@
-"#Esbo‡o do jogo Aster¢ids D‚cada 80-90"
+Desenvolvimento de um esboço do jogo "Asteróids", projeto ainda inacabado e aguardando possível reestruturação de código e implementação POO.
