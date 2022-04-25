@@ -12,10 +12,40 @@ pygame.display.set_caption("Criando meu Primeiro Jogo em PyGame 'Asteroids'")
 while windowVisible:
     pygame.time.delay(50)
 
-    # Testando evento de abortar o jogo e sair do Loop
+    # Testando evento de encerramento do jogo clicando no botão fechar janela
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             windowVisible = False
+
+    # Carregando evento de tecla pressionada para gerenciamento de controles do game
+    moveOn = pygame.key.get_pressed()
+
+    if moveOn[pygame.K_ESCAPE]:
+        windowVisible = False
+
+    if moveOn[pygame.K_UP]:
+        if yPos > 0:
+            yPos -= velocity
+        else:
+            yPos = xWidth
+
+    if moveOn[pygame.K_DOWN]:
+        if yPos < xWidth:
+            yPos += velocity
+        else:
+            yPos = 0
+
+    if moveOn[pygame.K_LEFT]:
+        if xPos > 0:
+            xPos -= velocity
+        else:
+            xPos = yHeight
+
+    if moveOn[pygame.K_RIGHT]:
+        if xPos < yHeight:
+            xPos += velocity
+        else:
+            xPos = 0
 
     windowGame.fill((0,0,0)) #Criando Janela do Jogo - background: preto
 
