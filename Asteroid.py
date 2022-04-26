@@ -1,3 +1,5 @@
+import time
+
 import pygame
 
 pygame.init()
@@ -110,7 +112,12 @@ while windowVisible:
 
     if (yPos_Rock > yPos - 35 and yPos_Rock < yPos + 35) and (xPos_Rock > xPos - 35 and xPos_Rock < xPos + 35):
         windowGame.blit(imageExplosion, (xPos-50, yPos-50))
+        pygame.mixer.music.load('soundexplosion.mp3')
+        pygame.mixer.music.play()
+        pygame.display.update()
         initGame = False
+        time.sleep(3)
+        break
 
     pygame.display.update()
 
