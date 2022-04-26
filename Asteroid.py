@@ -17,7 +17,6 @@ pygame.display.set_caption("Criando meu Primeiro Jogo em PyGame 'Asteroids'")
 
 initGame = False
 while windowVisible:
-    #pygame.time.delay(5)
 
     # Testando evento de encerramento do jogo clicando no botão fechar janela
     for event in pygame.event.get():
@@ -32,6 +31,7 @@ while windowVisible:
 
     if moveOn[pygame.K_UP]:
         if yPos > 0:
+            initGame = True
             imageDefault = 'shiptop.png'
             pygame.mixer.music.play()
             yPos -= velocity
@@ -40,6 +40,7 @@ while windowVisible:
 
     if moveOn[pygame.K_DOWN]:
         if yPos < xWidth:
+            initGame = True
             imageDefault = 'shipdown.png'
             pygame.mixer.music.play()
             yPos += velocity
@@ -48,6 +49,7 @@ while windowVisible:
 
     if moveOn[pygame.K_LEFT]:
         if xPos > 0:
+            initGame = True
             imageDefault = 'shipleft.png'
             pygame.mixer.music.play()
             xPos -= velocity
@@ -56,11 +58,48 @@ while windowVisible:
 
     if moveOn[pygame.K_RIGHT]:
         if xPos < yHeight:
+            initGame = True
             imageDefault = 'shipright.png'
             pygame.mixer.music.play()
             xPos += velocity
         else:
             xPos = 0
+
+    if initGame:
+
+        if xPos_Rock < yHeight:
+            xPos_Rock += 1
+        else:
+            xPos_Rock = 0
+
+        if yPos_Rock < xWidth:
+            yPos_Rock += 1
+        else:
+            yPos_Rock = 0
+
+        if imageDefault == 'shiptop.png':
+            if yPos > 0:
+                yPos -= 1
+            else:
+                yPos = xWidth
+
+        if imageDefault == 'shipdown.png':
+            if yPos < xWidth:
+                yPos += 1
+            else:
+                yPos = 0
+
+        if imageDefault == 'shipright.png':
+            if xPos < yHeight:
+                xPos += 1
+            else:
+                xPos = 0
+
+        if imageDefault == 'shipleft.png':
+            if xPos > 0:
+                xPos -= 1
+            else:
+                xPos = yHeight
 
     # Carregamento das imagens padrões do jogo - (Background/Elemento jogador)
     windowGame.blit(imageBackground, (0, 0))
