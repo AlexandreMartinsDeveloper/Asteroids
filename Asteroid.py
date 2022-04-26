@@ -15,10 +15,13 @@ pygame.mixer.music.load('SoundMotor.mp3')                           # Inicializa
 imageBackground = pygame.image.load('space.png')                    # Inicialização do Background da Tela do Game
 imageAsteroid = pygame.image.load('asteroid2.png')                  # Inicialização da Imagem Asteroid elemento Opositor
 imageExplosion = pygame.image.load('explosion.png')                 # Inicialização da Imagem Explosão durante a Colisão
+imageControls = pygame.image.load('ControlsGame.png')               # Inicialização da Imagem tela de Controle do Jogo
 windowGame = pygame.display.set_mode((yHeight, xWidth))
 pygame.display.set_caption("Criando meu Primeiro Jogo em PyGame 'Asteroids'")
 
 initGame = False                                                    # Setando Início do Jogo sem movimento
+timeExibition = 0                                                   # Temporizador de Apresentação tela Controles Jogo
+showKeyControls = True                                              # Valida a exibição da tela de Controles do Jogo
 while windowVisible:
 
     # Testando evento de encerramento do jogo clicando no botão fechar janela
@@ -37,6 +40,7 @@ while windowVisible:
             initGame = True
             imageDefault = 'shiptop.png'
             pygame.mixer.music.play()
+            timeExibition = 5000
             yPos -= velocity
         else:
             yPos = xWidth
@@ -46,6 +50,7 @@ while windowVisible:
             initGame = True
             imageDefault = 'shipdown.png'
             pygame.mixer.music.play()
+            timeExibition = 5000
             yPos += velocity
         else:
             yPos = 0
@@ -55,6 +60,7 @@ while windowVisible:
             initGame = True
             imageDefault = 'shipleft.png'
             pygame.mixer.music.play()
+            timeExibition = 5000
             xPos -= velocity
         else:
             xPos = yHeight
@@ -64,6 +70,7 @@ while windowVisible:
             initGame = True
             imageDefault = 'shipright.png'
             pygame.mixer.music.play()
+            timeExibition = 5000
             xPos += velocity
         else:
             xPos = 0
@@ -104,11 +111,16 @@ while windowVisible:
             else:
                 xPos = yHeight
 
-    # Carregamento das imagens padrões do jogo - (Background/Elemento jogador)
-    windowGame.blit(imageBackground, (0, 0))
-    imageShip = pygame.image.load(imageDefault)
-    windowGame.blit(imageShip, (xPos-25, yPos-33))
-    windowGame.blit(imageAsteroid, (xPos_Rock, yPos_Rock))
+    if (showKeyControls == True) and (timeExibition < 3000):
+        windowGame.blit(imageControls, ((yHeight-imageControls.get_width())/2,(xWidth-imageControls.get_height())/2))
+        pygame.display.update()
+        timeExibition += 1
+    else:
+        # Carregamento das imagens padrões do jogo - (Background/Elemento jogador)
+        windowGame.blit(imageBackground, (0, 0))
+        imageShip = pygame.image.load(imageDefault)
+        windowGame.blit(imageShip, (xPos-25, yPos-33))
+        windowGame.blit(imageAsteroid, (xPos_Rock, yPos_Rock))
 
     if (yPos_Rock > yPos - 35 and yPos_Rock < yPos + 35) and (xPos_Rock > xPos - 35 and xPos_Rock < xPos + 35):
         windowGame.blit(imageExplosion, (xPos-50, yPos-50))
