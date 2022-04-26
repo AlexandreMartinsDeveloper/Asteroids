@@ -5,9 +5,9 @@ pygame.init()
 velocity = 3                                # in Pixels
 xPos, yPos = [5, 5]                         # initing Position elements
 yHeight, xWidth = [700, 600]
-windowVisible = True
 windowGame = pygame.display.set_mode((yHeight,xWidth))
 pygame.display.set_caption("Criando meu Primeiro Jogo em PyGame 'Asteroids'")
+windowVisible = True
 
 while windowVisible:
     pygame.time.delay(50)
