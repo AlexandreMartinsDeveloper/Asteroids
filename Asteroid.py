@@ -12,10 +12,11 @@ imageDefault = 'shiptop.png'                                        # Inicializa
 pygame.mixer.music.load('SoundMotor.mp3')                           # Inicialização arquivo de áudio dos motores
 imageBackground = pygame.image.load('space.png')                    # Inicialização do Background da Tela do Game
 imageAsteroid = pygame.image.load('asteroid2.png')                  # Inicialização da Imagem Asteroid elemento Opositor
+imageExplosion = pygame.image.load('explosion.png')                 # Inicialização da Imagem Explosão durante a Colisão
 windowGame = pygame.display.set_mode((yHeight, xWidth))
 pygame.display.set_caption("Criando meu Primeiro Jogo em PyGame 'Asteroids'")
 
-initGame = False
+initGame = False                                                    # Setando Início do Jogo sem movimento
 while windowVisible:
 
     # Testando evento de encerramento do jogo clicando no botão fechar janela
@@ -106,6 +107,11 @@ while windowVisible:
     imageShip = pygame.image.load(imageDefault)
     windowGame.blit(imageShip, (xPos-25, yPos-33))
     windowGame.blit(imageAsteroid, (xPos_Rock, yPos_Rock))
+
+    if (yPos_Rock > yPos - 35 and yPos_Rock < yPos + 35) and (xPos_Rock > xPos - 35 and xPos_Rock < xPos + 35):
+        windowGame.blit(imageExplosion, (xPos-50, yPos-50))
+        initGame = False
+
     pygame.display.update()
 
 pygame.quit()
